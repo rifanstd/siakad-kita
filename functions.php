@@ -25,6 +25,34 @@ function querySelect($query){
 }
 
 
+// Function input data
+function inputData($data){
+	global $conn;
+	$nama = htmlspecialchars($data['nama']);
+	$jurusan = $data['jurusan'];
+	$semester = $data['semester'];
+
+	// sqlInsert
+	$sqlInsert = "insert into mahasiswa values('', '$nama', '$jurusan', '$semester')";
+
+	// Query execute (send data to database)
+	mysqli_query($conn, $sqlInsert);
+
+	return mysqli_affected_rows($conn);
+}
+
+
+// Function delete data
+function deleteData($npm){
+	global $conn;
+
+	// sql delete
+	$sqlDelete = "DELETE FROM mahasiswa WHERE npm = $npm";
+	mysqli_query($conn, $sqlDelete);
+
+	return mysqli_affected_rows($conn);
+}
+
 
 
 ?>

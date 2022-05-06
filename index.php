@@ -73,7 +73,7 @@ $dataMahasiswa = querySelect("SELECT * FROM mahasiswa");
 							<td><?php echo $row['smt'] ?></td>
 							<td>
 								<a href="#">Edit</a> |
-								<a href="#">Hapus</a>
+								<a href="delete.php?npm=<?php echo $row['npm']; ?>">Hapus</a>
 							</td>
 						</tr>
 					<?php endforeach; ?>
