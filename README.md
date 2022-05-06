@@ -1,2 +1,2 @@
-# siakad-kita
+# Siakad-Kita
 Sistem Informasi Akademik Sederhana
