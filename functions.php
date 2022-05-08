@@ -53,6 +53,40 @@ function deleteData($npm){
 	return mysqli_affected_rows($conn);
 }
 
+// Function Edit Data
+function editData($data){
+	global $conn;
+
+	$npm = $data['npm'];
+	$nama = htmlspecialchars($data['nama']);
+	$jurusan = $data['jurusan'];
+	$semester = $data['semester'];
+
+	// sql update
+	$sqlUpdate = "UPDATE `mahasiswa` SET 
+	nama = '$nama',
+	jurusan = '$jurusan',
+	smt = '$semester'
+	WHERE npm = $npm
+	";
+
+	// Query execute (send data to database)
+	mysqli_query($conn, $sqlUpdate);
+
+	return mysqli_affected_rows($conn);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ?>

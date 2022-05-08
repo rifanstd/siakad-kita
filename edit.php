@@ -2,6 +2,12 @@
 // require files
 require 'functions.php'; 
 
+// get Npm
+$npm = $_GET['npm'];
+
+// get data by npm
+$mhs = querySelect("SELECT * FROM mahasiswa WHERE npm = $npm");
+
 ?>
 
 <!DOCTYPE html>
@@ -14,15 +20,15 @@ require 'functions.php';
 	<!-- CSS Booststrap -->
 	<link href="bootstrap\css\bootstrap.min.css" rel="stylesheet">
 
-	<title>Input Data Mahasiswa</title>
+	<title>Edit Data Mahasiswa</title>
 </head>
 <body>
 
 	<!-- Title -->
 	<div class="jumbotron jumbotron-fluid text-center pt-5">
 		<div class="container">
-			<h1 class="display-5">Input Data</h1>
-			<p class="lead">Silahkan inputkan data mahasiswa.</p>
+			<h1 class="display-5">Edit Data</h1>
+			<p class="lead">Silahkan ubah data mahasiswa.</p>
 		</div>
 	</div>
 	<!-- End of Title -->
@@ -33,17 +39,18 @@ require 'functions.php';
 			<div class="col-md-6">
 				<form action="" method="post">
 					<div class="mb-3">
-						<label for="npm" class="form-label">NPM</label>
-						<input disabled type="number" class="form-control" id="npm" aria-describedby="npm" name="npm" placeholder="NPM diinputkan secara otomatis oleh sistem !">
+						<label for="npm" class="form-label">Edit NPM</label>
+						<input disabled type="number" class="form-control" id="npm" aria-describedby="npm" placeholder="<?php echo $mhs[0]['npm']; ?>">
+						<input type="hidden" name="npm" value="<?php echo $mhs[0]['npm']; ?>">
 					</div>
 					<div class="mb-3">
-						<label for="nama" class="form-label">Nama</label>
-						<input type="text" class="form-control" id="nama" aria-describedby="nama" name="nama" placeholder="Nama Lengkap">
+						<label for="nama" class="form-label">Edit Nama</label>
+						<input type="text" class="form-control" id="nama" aria-describedby="nama" name="nama" value="<?php echo $mhs[0]['nama']; ?>">
 					</div>
 					<div class="mb-3">
 						<label for="jurusan" class="form-label">Jurusan</label>
 						<select name="jurusan" id="jurusan" class="form-select">
-							<option value="none" selected disabled hidden>Pilih Jurusan</option>
+							<option value="<?php echo $mhs[0]['jurusan']; ?>" selected disabled hidden>Pilih Jurusan</option>
 							<option value="Ilmu Komputer">Ilmu Komputer</option>
 							<option value="Biologi">Biologi</option>
 							<option value="Fisika">Fisika</option>
@@ -54,7 +61,7 @@ require 'functions.php';
 					<div class="mb-3">
 						<label for="smt" class="form-label">Semester</label>
 						<select name="semester" id="smt" class="form-select">
-							<option value="none" selected disabled hidden>Pilih Semester</option>
+							<option value="<?php echo $mhs[0]['smt']; ?>" selected disabled hidden>Pilih Semester</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -89,17 +96,16 @@ require 'functions.php';
 			<div class="col-md text-center">
 				<?php
 				
-
 				// submit-add button is clicked?
 				if (isset($_POST['submit-add'])) {
 					// Cek if there is any field that empty
 					if (empty($_POST['nama']) || empty($_POST['jurusan']) || empty($_POST['semester'])) {
-						echo "<p style='color: red;'><b>Data harus Lengkap ! Gagal menambah data</b>.</p>";
+						echo "<p style='color: red;'><b>Data harus Lengkap ! Gagal mengubah data</b>.</p>";
 					}
 					else {
 						// check there is failed or succesed input data to database
-						if (inputData($_POST) > 0) {
-							echo '<p class="text-center" style="color: green; font-weight: bold;">Data Berhasil ditambahkan</p>';
+						if (editData($_POST) > 0) {
+							echo '<p class="text-center" style="color: green; font-weight: bold;">Data Berhasil diubah</p>';
 							echo '
 							<form>
 							<a href="index.php">
