@@ -4,6 +4,18 @@ require 'functions.php';
 
 // get data mahasiswa from database
 $dataMahasiswa = querySelect("SELECT * FROM mahasiswa");
+
+// if search
+if (isset($_POST['submit-search'])){
+	$dataMahasiswa = querySearch($_POST['keyword']);
+}
+
+// if filter
+if (isset($_POST['submit-filter'])){
+	$dataMahasiswa = queryFilter($_POST['filter-jurusan'], $_POST['filter-semester']);
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -32,16 +44,55 @@ $dataMahasiswa = querySelect("SELECT * FROM mahasiswa");
 	<div class="container mb-3">
 		<div class="row">
 			<div class="col-md">
+				<form action="" method="post" class="d-flex justify-content-end">
+					<select name="filter-jurusan" class="form-select mb-2 me-2">
+						<option value="*" selected hidden>Jurusan</option>
+						<option value="Fisika">Fisika</option>
+						<option value="Biologi">Biologi</option>
+						<option value="Kimia">Kimia</option>
+						<option value="Matematika">Matematika</option>
+						<option value="Ilmu Komputer">Ilmu Komputer</option>
+					</select>
+					<select name="filter-semester" id="key" class="form-select mb-2 me-2">
+						<option value="*" selected hidden>Semester</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+					</select>
+					<button class="btn btn-outline-success mb-2" type="submit" name="submit-filter">Filter</button>
+					<?php if (isset($_POST['submit-filter'])) : ?>
+						<?php if ($_POST['filter-jurusan'] != '*' or $_POST['filter-semester'] != '*'): ?>
+							<a href="index.php">
+								<button class="btn btn-primary mb-2 ms-2" type="submit">Reset</button>
+							</a>
+						<?php endif ?>
+					<?php endif; ?>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md mt-2">
 				<form>
 					<a href="input_data.php">
 						<button type="button" class="btn btn-primary">Tambah Data</button>
 					</a>
 				</form>
 			</div>
-			<div class="col-md">
-				<form class="d-flex w-50 ms-auto">
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Search</button>
+			<div class="col-md mt-2">
+				<form action="" method="post" class="d-flex ms-auto">
+					<input class="form-control me-2" name="keyword" type="search" placeholder="Search by name or NPM" aria-label="Search" autocomplete="off">
+					<button class="btn btn-outline-success" type="submit" name="submit-search">Search</button>
 				</form>
 			</div>
 		</div>
@@ -72,8 +123,12 @@ $dataMahasiswa = querySelect("SELECT * FROM mahasiswa");
 							<td><?php echo $row['jurusan'] ?></td>
 							<td><?php echo $row['smt'] ?></td>
 							<td>
-								<a href="edit.php?npm=<?php echo $row['npm']; ?>">Edit</a> |
-								<a href="delete.php?npm=<?php echo $row['npm']; ?>">Hapus</a>
+								<a href="edit.php?npm=<?php echo $row['npm']; ?>" style="text-decoration: none;">
+									<button class="btn btn-warning mt-1" type="submit" style="font-size: 12px;">Edit</button>
+								</a>
+								<a href="delete.php?npm=<?php echo $row['npm']; ?>" style="text-decoration: none;">
+									<button class="btn btn-danger mt-1" type="submit" style="font-size: 12px;">Hapus</button>
+								</a>
 							</td>
 						</tr>
 					<?php endforeach; ?>

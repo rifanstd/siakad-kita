@@ -50,7 +50,7 @@ $mhs = querySelect("SELECT * FROM mahasiswa WHERE npm = $npm");
 					<div class="mb-3">
 						<label for="jurusan" class="form-label">Jurusan</label>
 						<select name="jurusan" id="jurusan" class="form-select">
-							<option value="<?php echo $mhs[0]['jurusan']; ?>" selected disabled hidden>Pilih Jurusan</option>
+							<option value="<?php echo $mhs[0]['jurusan']; ?>" selected hidden><?php echo $mhs[0]['jurusan']; ?></option>
 							<option value="Ilmu Komputer">Ilmu Komputer</option>
 							<option value="Biologi">Biologi</option>
 							<option value="Fisika">Fisika</option>
@@ -61,7 +61,7 @@ $mhs = querySelect("SELECT * FROM mahasiswa WHERE npm = $npm");
 					<div class="mb-3">
 						<label for="smt" class="form-label">Semester</label>
 						<select name="semester" id="smt" class="form-select">
-							<option value="<?php echo $mhs[0]['smt']; ?>" selected disabled hidden>Pilih Semester</option>
+							<option value="<?php echo $mhs[0]['smt']; ?>" selected hidden><?php echo $mhs[0]['smt']; ?></option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -79,7 +79,7 @@ $mhs = querySelect("SELECT * FROM mahasiswa WHERE npm = $npm");
 						</select>
 					</div>
 					<div class="d-flex">
-						<button type="submit" name="submit-add" class="btn btn-primary me-auto">Tambah</button>
+						<button type="submit" name="submit-add" class="btn btn-primary me-auto">Simpan</button>
 						<a href="index.php" target="_blank">
 							<button type="button" class="btn btn-primary ms-auto">Lihat Data</button>
 						</a>
@@ -106,6 +106,16 @@ $mhs = querySelect("SELECT * FROM mahasiswa WHERE npm = $npm");
 						// check there is failed or succesed input data to database
 						if (editData($_POST) > 0) {
 							echo '<p class="text-center" style="color: green; font-weight: bold;">Data Berhasil diubah</p>';
+							echo '
+							<form>
+							<a href="index.php">
+							<button type="button" class="btn btn-primary">Lihat Data</button>
+							</a>
+							</form>
+							';
+						}
+						else {
+							echo '<p class="text-center" style="color: blue; font-weight: bold;">Tidak ada data yang diubah</p>';
 							echo '
 							<form>
 							<a href="index.php">
