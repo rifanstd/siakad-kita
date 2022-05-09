@@ -76,7 +76,33 @@ function editData($data){
 	return mysqli_affected_rows($conn);
 }
 
+// Function serching data
+function querySearch($keyword){
+	$sqlSelect = "SELECT * FROM mahasiswa
+	WHERE
+	npm LIKE '%$keyword%' OR
+	nama LIKE '%$keyword%'
+	";
 
+	return querySelect($sqlSelect);
+}
+
+// Function filter
+function queryFilter($getJurusan, $getSemester){
+	$sqlFilter = "SELECT * FROM mahasiswa";
+
+	if ($getJurusan == '*' and $getSemester != '*') {
+		$sqlFilter .= " WHERE smt = '$getSemester'";
+	}
+	elseif ($getJurusan != '*' and $getSemester == '*'){
+		$sqlFilter .= " WHERE jurusan = '$getJurusan'";
+	}
+	elseif($getJurusan != '*' and $getSemester != '*'){
+		$sqlFilter .= " WHERE smt = '$getSemester' AND jurusan = '$getJurusan'";
+	}
+
+	return querySelect($sqlFilter);
+}
 
 
 
