@@ -76,7 +76,7 @@ if (isset($_POST['submit-filter'])){
 							<a href="index.php">
 								<button class="btn btn-primary mb-2 ms-2" type="submit">Reset</button>
 							</a>
-						<?php endif ?>
+						<?php endif; ?>
 					<?php endif; ?>
 				</form>
 			</div>
@@ -93,6 +93,13 @@ if (isset($_POST['submit-filter'])){
 				<form action="" method="post" class="d-flex ms-auto">
 					<input class="form-control me-2" name="keyword" type="search" placeholder="Search by name or NPM" aria-label="Search" autocomplete="off">
 					<button class="btn btn-outline-success" type="submit" name="submit-search">Search</button>
+					<?php if (isset($_POST['submit-search'])) : ?>
+						<?php if ($_POST['keyword'] != ''): ?>
+							<a href="index.php">
+								<button class="btn btn-primary ms-2" type="submit">Reset</button>
+							</a>
+						<?php endif; ?>
+					<?php endif; ?>
 				</form>
 			</div>
 		</div>
