@@ -1,4 +1,11 @@
 <?php
+// session
+session_start();
+if (!isset($_SESSION["login"])) {
+	header("Location: login.php");
+	exit;	
+}
+
 // require file to use
 require 'functions.php';
 
@@ -31,6 +38,27 @@ if (isset($_POST['submit-filter'])){
 	<title>Sistem Informasi Akademik Kita</title>
 </head>
 <body>
+
+	<!-- section nav bar -->
+	<section>
+		
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="index.php">Siakad Kita</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="logout.php">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</section>
 
 	<!-- Jumbotron -->
 	<div class="jumbotron pt-5">
@@ -85,7 +113,7 @@ if (isset($_POST['submit-filter'])){
 			<div class="col-md mt-2">
 				<form>
 					<a href="input_data.php">
-						<button type="button" class="btn btn-primary">Tambah Data</button>
+						<button type="button" class="btn btn-success">Tambah Data</button>
 					</a>
 				</form>
 			</div>

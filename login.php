@@ -1,4 +1,12 @@
 <?php 
+
+// session
+session_start();
+if (isset($_SESSION["login"])) {
+	header("Location: index.php");
+	exit;	
+}
+
 // require files
 require 'functions.php';
 
@@ -21,6 +29,11 @@ require 'functions.php';
 
 	<!-- Login container -->
 	<div class="container mt-5" style="max-width: 500px;">
+		<div class="row text-center">
+			<div class="col">
+				<h1>Login</h1>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md">
 				<form action="" method="post">
@@ -34,10 +47,10 @@ require 'functions.php';
 					</div>
 					<div class="row">
 						<div class="col-md">
-							<button type="submit" class="btn btn-primary" name="login">Login</button>
+							<button type="submit" class="btn btn-success" name="login">Login</button>
 						</div>
 						<div class="col-md d-flex justify-content-end align-self-center">
-							<a href="register.php" style="text-decoration: none; color: blue;">Belum memiliki akun?</a>
+							<a href="register.php" style="text-decoration: underline; color: #198754;">Belum memiliki akun?</a>
 						</div>
 					</div> 
 				</form>
@@ -54,7 +67,7 @@ require 'functions.php';
 			<?php } elseif(login($_POST) === (-1)) { ?>
 				<p style="color: red; font-weight: bold;">Password yang anda masukkan salah!</p>
 			<?php } else { ?>
-				<?php header("Location: index.php"); ?>
+				<?php $_SESSION["login"] = true; header("Location: index.php"); exit;?>
 			<?php } ?>
 		<?php } ?>	
 	</div>

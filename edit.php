@@ -1,6 +1,14 @@
 <?php 
+// session
+session_start();
+if (!isset($_SESSION["login"])) {
+	header("Location: login.php");
+	exit;	
+}
+
 // require files
 require 'functions.php'; 
+
 
 // get Npm
 $npm = $_GET['npm'];
@@ -79,9 +87,9 @@ $mhs = querySelect("SELECT * FROM mahasiswa WHERE npm = $npm");
 						</select>
 					</div>
 					<div class="d-flex">
-						<button type="submit" name="submit-add" class="btn btn-primary me-auto">Simpan</button>
+						<button type="submit" name="submit-add" class="btn btn-success me-auto">Simpan</button>
 						<a href="index.php" target="_blank">
-							<button type="button" class="btn btn-primary ms-auto">Lihat Data</button>
+							<button type="button" class="btn btn-success ms-auto">Lihat Data</button>
 						</a>
 					</div>
 				</form>	
