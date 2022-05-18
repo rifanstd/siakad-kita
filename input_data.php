@@ -1,6 +1,15 @@
 <?php 
+// session
+session_start();
+if (!isset($_SESSION["login"])) {
+	header("Location: login.php");
+	exit;	
+}
+
 // require files
 require 'functions.php'; 
+
+
 
 ?>
 
@@ -72,9 +81,9 @@ require 'functions.php';
 						</select>
 					</div>
 					<div class="d-flex">
-						<button type="submit" name="submit-add" class="btn btn-primary me-auto">Tambah</button>
+						<button type="submit" name="submit-add" class="btn btn-success me-auto">Tambah</button>
 						<a href="index.php" target="_blank">
-							<button type="button" class="btn btn-primary ms-auto">Lihat Data</button>
+							<button type="button" class="btn btn-success ms-auto">Lihat Data</button>
 						</a>
 					</div>
 				</form>	

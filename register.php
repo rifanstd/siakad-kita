@@ -19,6 +19,11 @@ require 'functions.php';
 <body>
 	<!-- register -->
 	<div class="container mt-5" style="max-width: 500px;">
+		<div class="row text-center">
+			<div class="col">
+				<h1>Register</h1>
+			</div>
+		</div>
 		<div class="row">
 			<form action="" method="post">
 				<div class="mb-3">
@@ -36,10 +41,10 @@ require 'functions.php';
 				</div>
 				<div class="row">
 					<div class="col-md">
-						<button type="submit" class="btn btn-primary" name="register">Register</button>
+						<button type="submit" class="btn btn-success" name="register">Register</button>
 					</div>
 					<div class="col-md d-flex justify-content-end align-self-center">
-						<a href="login.php" style="text-decoration: none; color: blue;">Sudah memiliki akun?</a>
+						<a href="login.php" style="text-decoration: none; color: #198754;">Sudah memiliki akun?</a>
 					</div>
 				</div> 
 			</form>
