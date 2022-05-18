@@ -4,6 +4,69 @@
 $conn = mysqli_connect("localhost", "root", "", "siakad_kita");
 
 
+// Function Login
+function login($data){
+	global $conn;
+
+	$username = $data["username"];
+	$password = $data["password"];
+
+	$cekUsernameExist = mysqli_query($conn, "SELECT username,password FROM users WHERE username = '$username'");
+
+	// check apakah username ada
+	if (mysqli_num_rows($cekUsernameExist) === 1) {
+		$row = mysqli_fetch_assoc($cekUsernameExist);
+
+		// check username
+		if (password_verify($password, $row["password"])) {
+			return 1;
+		}
+		else {
+			return -1;
+		}
+	}
+	else {
+		return 0;
+	}
+}
+
+// Function register
+function register($data){
+	global $conn;
+
+	$username = htmlspecialchars(stripslashes($data["username"]));
+	$password = htmlspecialchars($data["password"]);
+	$confirm_password = $data["confirm-password"];
+
+	// cek username apakah sudah ada atau belum
+	$usernameExist = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
+
+	// cek username
+	if (mysqli_num_rows($usernameExist) != 0) {
+		return 0;
+	}
+
+	// cek apakah password terdiri dari minimal 8 karakter
+	if (strlen($password) < 8) {
+		return -1;
+	}
+
+	// cek apakah password sama dengan confirmnya 
+	if ($password !== $confirm_password) {
+		return -2;
+	}
+
+	// enkripsi password
+	$password = password_hash($password, PASSWORD_DEFAULT);
+
+	// sql insert
+	mysqli_query($conn, "INSERT INTO users VALUES('', '$username', '$password')");
+
+	// return jika berhasil
+	return mysqli_affected_rows($conn);
+}
+
+
 // Function Query Select
 function querySelect($query){
 	global $conn;
