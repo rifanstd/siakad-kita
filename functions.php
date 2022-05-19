@@ -66,6 +66,22 @@ function register($data){
 	return mysqli_affected_rows($conn);
 }
 
+// Functions Cookie
+function dataCookie($data){
+	global $conn;
+
+	$username = $data["username"];
+
+	$result = mysqli_query($conn, "SELECT id FROM users WHERE username = '$username'");
+	$row = mysqli_fetch_assoc($result);
+
+	$getData = array();
+
+	array_push($getData, $row["id"]);
+	array_push($getData, $username);
+
+	return $getData;
+}
 
 // Function Query Select
 function querySelect($query){
