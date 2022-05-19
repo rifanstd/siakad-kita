@@ -1,4 +1,5 @@
 <?php
+
 // session
 session_start();
 if (!isset($_SESSION["login"])) {
@@ -38,11 +39,9 @@ if (isset($_POST['submit-filter'])){
 	<title>Sistem Informasi Akademik Kita</title>
 </head>
 <body>
-
+	
 	<!-- section nav bar -->
 	<section>
-		
-
 		<nav class="navbar navbar-expand-lg navbar-dark bg-success">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="index.php">Siakad Kita</a>
@@ -175,6 +174,7 @@ if (isset($_POST['submit-filter'])){
 
 
 	<!-- Javascript Bootstrap -->
-	<script src="bootstrap\js\bootstrap.min.css"></script>
+	<script src="bootstrap\js\bootstrap.min.js"></script>
+
 </body>
 </html>
